@@ -1,0 +1,5 @@
+name = "caio_ca"
+compatibility_date = "2026-05-03"
+
+[assets]
+directory = "./_site/"
