@@ -46,9 +46,9 @@ Or the even more ergonomic approach with delegate in Active Support when you are
 Ruby also has Object#then and Kernel#tap that let you chain operations in a way that reads top to bottom without intermediate variables.
 
 ```ruby
-user = User.new(params)
-  .then { |u| u.normalize!; u }
+User.new(params)
   .tap { |u| Log.info("Created #{u.id}") }
+  .then { |u| u.normalize!; u }
   .save
 ```
 
@@ -66,24 +66,13 @@ Fiber.schedule do
 end
 ```
 
-```ruby
-case record
-in { status: 200, body: }
-  handle_success(body)
-in { status: 404 }
-  redirect_to_not_found
-else
-  log_unknown(record)
-end
-```
+Then there are the tools around the language that rarely get talked about outside Ruby circles. The Ruby LSP from Shopify gives excellent editor integration with minimal setup and works great alongside Steep or RBS for gradual typing. RuboCop keeps the style consistent without the ceremony you see in other ecosystems.
 
-Then there are the tools around the language that rarely get talked about outside Ruby circles. The Ruby LSP from Shopify gives excellent editor integration with minimal setup and works great alongside steep or rbs for gradual typing. Rubocop keeps the style consistent without the ceremony you see in other ecosystems.
+[Ruby LSP](https://github.com/Shopify/ruby-lsp)
 
-https://github.com/Shopify/ruby-lsp
+[Steep](https://github.com/ruby/steep)
 
-https://github.com/ruby/steep
-
-https://github.com/rubocop/rubocop
+[RuboCop](https://github.com/rubocop/rubocop)
 
 The standard library is another quiet strength. Instead of pulling in half a dozen small gems for common tasks, you often find what you need already there. Need a queue? Thread::Queue has been solid for years. Want to parse JSON with some streaming? The json and csv libraries handle most real world cases without ceremony.
 
@@ -91,7 +80,7 @@ On the performance side, Ruby 3.x brought YJIT, and now we have ZJIT landing in 
 
 I ran a simple benchmark comparing a recursive fibonacci implementation across a few languages on the same machine. Ruby with ZJIT was within 2-3x of Go and not far behind optimized Rust in this particular case, while Python with pypy still trailed behind. Of course microbenchmarks are limited, but the trend line is real. Real applications see bigger wins on warm code paths once the JIT has time to optimize.
 
-https://github.com/ruby/ruby (ZJIT development happens in the main ruby tree under the jit branch discussions)
+[CRuby ZJIT](https://github.com/ruby/ruby) (ZJIT development lives in the main repo)
 
 Compared to Rust, Ruby wins on iteration speed for business logic. In Rust you often spend time fighting the borrow checker on things that are obvious at runtime. Go gives you excellent concurrency primitives out of the box, but the lack of generics until recently and the somewhat rigid error handling can make simple scripts feel heavier than they need to. Python is the closest spiritual cousin, yet it still requires more boilerplate for the same high level ideas, especially around classes and decorators.
 
@@ -115,19 +104,19 @@ The same idea in a few other languages tends to expand into more lines just to e
 
 Ruby also shines in little metaprogramming utilities that stay readable. define_method, class_eval, and the ability to intercept missing methods let you build expressive APIs without a code generator step. Libraries like dry-rb or aasm use these features tastefully to give you clean state machines and validation layers.
 
-https://github.com/dry-rb/dry-rb
+[dry-rb](https://github.com/dry-rb/dry-rb)
 
-https://github.com/aasm/aasm
+[aasm](https://github.com/aasm/aasm)
 
 The community around tooling has matured a lot. Byebug and pry still feel more fluid than many debuggers I have used elsewhere. For background jobs, solid_queue and good_job are simple enough that you can understand the entire implementation in an afternoon.
 
-https://github.com/rails/solid_queue
+[Solid Queue](https://github.com/rails/solid_queue)
 
-https://github.com/bensheldon/good_job
+[Good Job](https://github.com/bensheldon/good_job)
 
 Even deployment has gotten nicer. Kamal replaced the old capistrano dance for a lot of people, and it feels like something written by people who actually run small teams.
 
-https://github.com/basecamp/kamal
+[Kamal](https://github.com/basecamp/kamal)
 
 I am not claiming Ruby beats every other language at every task. There are domains where Rust or Go make more sense. But for the broad middle of web applications, background processing, and internal tooling, Ruby keeps delivering developer happiness without requiring constant ceremony or context switching.
 
