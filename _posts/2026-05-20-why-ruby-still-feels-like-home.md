@@ -70,7 +70,7 @@ Then there are the tools around the language that rarely get talked about outsid
 
 [Ruby LSP](https://github.com/Shopify/ruby-lsp)
 
-[Steep](https://github.com/ruby/steep)
+[Steep](https://github.com/soutaro/steep)
 
 [RuboCop](https://github.com/rubocop/rubocop)
 
@@ -104,7 +104,7 @@ The same idea in a few other languages tends to expand into more lines just to e
 
 Ruby also shines in little metaprogramming utilities that stay readable. define_method, class_eval, and the ability to intercept missing methods let you build expressive APIs without a code generator step. Libraries like dry-rb or aasm use these features tastefully to give you clean state machines and validation layers.
 
-[dry-rb](https://github.com/dry-rb/dry-rb)
+[dry-rb](https://dry-rb.org)
 
 [aasm](https://github.com/aasm/aasm)
 
