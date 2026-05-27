@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 
 gem 'base64'
 gem 'bigdecimal'
+gem 'cgi'
 gem 'csv'
 gem 'jekyll', '~> 4.4'
 gem 'webrick', '~> 1.9'
